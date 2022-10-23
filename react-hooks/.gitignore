@@ -1,9 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# dependencies, tự động loại những foder này để, khi lưu dự án về sẽ không nặng dung lượng. ta chỉ cần còn file package.json
+# lấy dự án xong, ta chạy npm i , lập tức nó sẽ cập nhật tất cả dự án các file lại cho ta
 /node_modules
 /.pnp
 .pnp.js
+
 
 # testing
 /coverage

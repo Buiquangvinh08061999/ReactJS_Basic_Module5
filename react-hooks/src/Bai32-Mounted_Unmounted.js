@@ -1,10 +1,16 @@
-import {useState,useEffect} from 'react'
+import {useState , useEffect} from 'react'
+
+
+const typeNameAPI = ['posts', 'comments', 'albums'];
 
 function Content() {
+
     const[posts, setPosts] = useState([])
-  
+
+    const [nameAPI , setNameAPI] = useState('posts');
+    //tạo tên đường dẫn mặc định, nếu muốn thay đổi tên đường dẫn thì setNameAPI() lại, nhưng yêu cầu các trường dữ liệu phải giống nhau mới render ra được
     const getFetchUser =() => {
-      fetch('https://jsonplaceholder.typicode.com/posts' , {method:"GET"} )
+      fetch(`https://jsonplaceholder.typicode.com/${nameAPI}` , {method:"GET"} )
       .then((res) =>
         res.json()
       )
@@ -17,13 +23,17 @@ function Content() {
 
     useEffect(() => {
         getFetchUser();
-    }, []);
+
+    }, [nameAPI]); //[deps, truyền vào tên API được setNameAPI vào]
+
+
+
 
     const deleteById = (postId) => {
       let confirm = window.confirm('Bạn có chắc muốn xóa dữ liệu từ id ' + postId + 'không ?');
       
       if(confirm){
-        setPosts(posts.filter((postFillter) => postFillter.id !== postId ))
+        setPosts(posts.filter((postFillter) => postFillter.id !== postId )) // Kiểm tra id, setPost lại, tìm thấy id có tồn tại thì xóa luôn
 
       }
       console.log(">>>>>>Show deleteById", postId);
@@ -51,10 +61,23 @@ function Content() {
 
       console.log('save' + postId);
   }
-
+  
   return (
       <div>
-        <i className="fa-regular fa-plus"/>
+        {typeNameAPI.map(type =>
+          <button
+              key={type}
+              className='me-3'// magin-right
+              style={nameAPI === type ? {
+                color: '#fff',backgroundColor:'#333'
+              } : {}}  // lấy tên truyền vào đúng với cái type tên đó, thì hiển thị màu
+              
+              onClick={() => setNameAPI(type)} //tên type khi ta kích vào thẻ button nào sẽ truyền vào setNameAPI
+          >
+            {type} 
+          </button>
+        )}
+  
         <table className='table table-hover'>
           <thead>
            <tr>

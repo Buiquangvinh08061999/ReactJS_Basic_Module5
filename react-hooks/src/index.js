@@ -4,15 +4,25 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
-import App from './AppHoc';
+import App from './AppHoc';//Bài 32
+
+
 import reportWebVitals from './reportWebVitals';
+import ToDo from './component/ToDo/TodoUse';
+
+// import Bai6 from './Bai6';
+// import Bai7 from './Bai7';
+// import Gift from './component/Gift/Gift';
+// import ToDo from './component/ToDo/Todo';
+
+
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
 
-    <App />
+    <ToDo/>
 
    </React.StrictMode> //Tắt đi sẽ không bị lặp 2 lần api dữ liệu nữa
 );
